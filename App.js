@@ -1,19 +1,58 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { FontAwesome } from '@expo/vector-icons';
+// import IndexScreen from './src/screens/IndexScreen';
+import CreateScreen from './src/screens/CreateScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const navigator = createStackNavigator(
+  {
+    index: CreateScreen,
+    create: CreateScreen,
   },
-});
+  {
+    initialRouteName: 'index',
+    defaultNavigationOptions: {
+      title: (
+        <React.Fragment>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: '900',
+              fontFamily: 'sans-serif',
+              marginHorizontal: 10,
+            }}
+          >
+            Habits
+          </Text>
+          <FontAwesome
+            name='line-chart'
+            style={{
+              fontSize: 20,
+            }}
+          />
+        </React.Fragment>
+      ),
+      headerStyle: {
+        backgroundColor: '#8AFA96',
+      },
+      headerTitleStyle: {
+        color: '#fff',
+        fontWeight: 'boldest',
+      },
+      headerBackTitleStyle: {
+        color: '#fff',
+      },
+      cardStyle: {
+        backgroundColor: '#d3d3d3',
+      },
+    },
+  }
+);
+
+const App = createAppContainer(navigator);
+
+export default () => {
+  return <App />;
+};

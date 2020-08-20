@@ -1,0 +1,27 @@
+Cigarettes: 
+
+Environment - 
+
+src WHO - https://www.who.int/bulletin/volumes/93/12/15-152744/en/
+src how many smoke - https://www.verywellmind.com/global-smoking-statistics-2824393
+
+7.34 million T CO2 from smoking 
+5.2 million T methane from smoking 
+4200000 Ha deforrestation 
+
+6.5 trillion Cigarettes
+
+Environment -
+
+0.0011    Kg         CO2
+0.0008    Kg         Methane
+0.042     M(sq)     land
+0.00017   Kg        waste 
+
+Health -
+
+12        mg        tar 
+1         -         cigarette
+
+Finance - 
+1.5       aud       $
