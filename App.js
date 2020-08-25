@@ -3,13 +3,15 @@ import { Text } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesome } from '@expo/vector-icons';
-// import IndexScreen from './src/screens/IndexScreen';
+import IndexScreen from './src/screens/IndexScreen';
 import CreateScreen from './src/screens/CreateScreen';
+import CustomHabitScreen from './src/screens/CustomHabitScreen';
 
 const navigator = createStackNavigator(
   {
-    index: CreateScreen,
-    create: CreateScreen,
+    index: CustomHabitScreen,
+    create: CustomHabitScreen,
+    custom: CustomHabitScreen,
   },
   {
     initialRouteName: 'index',

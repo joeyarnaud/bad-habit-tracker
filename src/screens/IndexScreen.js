@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   plusContainer: {
     display: 'flex',
     flexDirection: 'row',
-    fontSize: 20,
     alignContent: 'center',
   },
   plusText: {

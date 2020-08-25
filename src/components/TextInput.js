@@ -20,8 +20,20 @@ function Input(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  label: {},
+  container: {
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 15,
+    fontWeight: '500',
+    marginBottom: 3,
+  },
+  input: {
+    backgroundColor: '#fff',
+    padding: 5,
+    borderRadius: 5,
+    height: 35,
+  },
   error: {},
 });
 
