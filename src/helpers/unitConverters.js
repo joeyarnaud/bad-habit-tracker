@@ -8,6 +8,8 @@ export const convertTimeUnitToWord = (unit) => {
       return 'Hour';
     case 'd':
       return 'Day';
+    case 'w':
+      return 'Week';
     case 'M':
       return 'Month';
     case 'y':

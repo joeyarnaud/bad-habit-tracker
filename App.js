@@ -6,12 +6,18 @@ import { FontAwesome } from '@expo/vector-icons';
 import IndexScreen from './src/screens/IndexScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import CustomHabitScreen from './src/screens/CustomHabitScreen';
+import PremadeHabitScreen from './src/screens/PremadeHabitScreen';
+import HabitsScreen from './src/screens/HabitsScreen';
+import HabitScreen from './src/screens/HabitScreen';
 
 const navigator = createStackNavigator(
   {
-    index: CustomHabitScreen,
-    create: CustomHabitScreen,
+    index: CreateScreen,
+    create: CreateScreen,
     custom: CustomHabitScreen,
+    premade: PremadeHabitScreen,
+    habits: HabitsScreen,
+    habit: HabitScreen,
   },
   {
     initialRouteName: 'index',

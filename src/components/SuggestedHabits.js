@@ -29,6 +29,8 @@ const smoking = {
   name: 'Smoking',
   icon: <FontAwesome5 name='smoking' size={24} color='black' />,
   categories: ['environment', 'health', 'finance'],
+  id: 1,
+  type: 'premade',
 };
 
 const drinking = {
@@ -39,6 +41,8 @@ const drinking = {
     { amount: 10, unit: 'g', description: 'Alcohol', impact: 'avoided' },
   ],
   finance: [{ amount: 31, unit: 'aud', description: 'Money', impact: 'saved' }],
+  id: 2,
+  type: 'premade',
 };
 
 const social = {
@@ -48,6 +52,8 @@ const social = {
   time: [
     { amount: 144, unit: 'minutes', description: 'Time', impact: 'saved' },
   ],
+  id: 3,
+  type: 'premade',
 };
 
 const gambling = {
@@ -57,6 +63,8 @@ const gambling = {
   finance: [
     { amount: 3.5, unit: 'aud', description: 'Money', impact: 'saved' },
   ],
+  id: 4,
+  type: 'premade',
 };
 
 const habits = [smoking, drinking, social, gambling];
@@ -72,7 +80,7 @@ function SuggestedHabits(props) {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('custom', item)}
+              onPress={() => navigation.navigate('premade', item)}
             >
               <HabitSummary key={item.name} name={item.name} icon={item.icon} />
             </TouchableOpacity>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Picker } from 'react-native';
 import PropTypes from 'prop-types';
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import isEmpty from '../helpers/is-empty';
 import SelectedCategory from './SelectedCategory';
 

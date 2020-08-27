@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { AsyncStorage } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { calculateEffects } from '../helpers/calculateEffects';
+import IndexNavigationButton from '../components/IndexNavigationButton';
 
-export default function IndexScreen() {
+function IndexScreen({ navigation }) {
+  const [habits, setHabits] = useState([]);
+  const [effects, setEffects] = useState({});
+
+  const getHabits = async () => {
+    const keys = await AsyncStorage.getAllKeys();
+    const habs = [];
+    for (let i = 0; i < keys.length; i++) {
+      habs.push(JSON.parse(await AsyncStorage.getItem(keys[i])));
+    }
+    setHabits(habs);
+
+    setEffects(calculateEffects(habs));
+  };
+
+  useEffect(() => {
+    console.log('here');
+    getHabits();
+  }, []);
+
   return (
-    <View>
-      <Text>Index</Text>
+    <View style={styles.container}>
+      <Text></Text>
+      <IndexNavigationButton
+        text='My Habits'
+        handleClick={() => navigation.navigate('habits')}
+        color='#61A3E8'
+        iconName='calendar'
+      />
+      <IndexNavigationButton
+        text='Create Habit'
+        handleClick={() => navigation.navigate('create')}
+        color='#61A3E8'
+        iconName='plus'
+      />
     </View>
   );
 }
@@ -44,4 +78,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontWeight: '900',
   },
+  container: {
+    padding: 10,
+  },
 });
+
+export default IndexScreen;

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Select from './Select';
 import TextInput from './TextInput';
+import isEmpty from '../helpers/is-empty';
 
 const CHANGE_EFFECT = 'CHANGE_EFFECT';
 const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
@@ -104,7 +105,7 @@ function AddEffect(props) {
         <TextInput
           placeholder='amount'
           value={amount}
-          label='Amount'
+          label='Amount*'
           handleChange={(e) =>
             dispatch({ type: CHANGE_AMOUNT, payload: e.target.value })
           }
@@ -128,7 +129,7 @@ function AddEffect(props) {
             { label: 'Day', value: 'd' },
             { label: 'Month', value: 'M' },
             { label: 'Year', value: 'y' },
-            { label: 'Calories', value: 'cKal' },
+            { label: 'Calories', value: 'kCal' },
             { label: 'Kilojoules', value: 'kJ' },
             { label: 'Meter', value: 'm(meter)' },
             { label: 'Kilometer', value: 'km' },
@@ -140,7 +141,7 @@ function AddEffect(props) {
         <TextInput
           placeholder='name'
           value={name}
-          label='Name'
+          label='Name*'
           handleChange={(e) =>
             dispatch({ type: CHANGE_NAME, payload: e.target.value })
           }
@@ -157,6 +158,7 @@ function AddEffect(props) {
             { label: 'Minute', value: 'm' },
             { label: 'Hour', value: 'h' },
             { label: 'Day', value: 'd' },
+            { label: 'Week', value: 'w' },
             { label: 'Month', value: 'M' },
             { label: 'Year', value: 'y' },
           ]}
@@ -164,6 +166,7 @@ function AddEffect(props) {
         <TouchableOpacity
           style={styles.submitButton}
           onPress={() => submit({ effect, category, amount, name, unit, time })}
+          disabled={isEmpty(name) || isEmpty(amount)}
         >
           <Text style={styles.submitText}>Submit Effect</Text>
         </TouchableOpacity>
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   effectTitle: {
-    fontSize: '700',
+    fontWeight: '700',
     textAlign: 'center',
     fontSize: 20,
   },
