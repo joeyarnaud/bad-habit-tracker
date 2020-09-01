@@ -37,7 +37,11 @@ function HabitScreen({ navigation }) {
               date={habit.date}
               effects={habit.effects}
               key={habit.id}
-              handlePress={() => navigation.navigate('habit', { id: habit.id })}
+              handlePress={() =>
+                navigation.navigate('habit', {
+                  id: ['Smoking'].includes(habit.name) ? habit.name : habit.id,
+                })
+              }
             />
           );
         })}

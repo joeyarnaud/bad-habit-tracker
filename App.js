@@ -12,7 +12,7 @@ import HabitScreen from './src/screens/HabitScreen';
 
 const navigator = createStackNavigator(
   {
-    index: CreateScreen,
+    index: IndexScreen,
     create: CreateScreen,
     custom: CustomHabitScreen,
     premade: PremadeHabitScreen,

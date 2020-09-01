@@ -2,16 +2,33 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import moment from 'moment';
 import { convertTimeUnitToWord } from '../helpers/unitConverters';
+import { formatUnit } from '../helpers/unitFormatter';
 
 function EffectSummary(props) {
   const { effect, category, amount, name, unit, time, date } = props;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        {Math.round(Number(amount) * moment().diff(moment(date), time, true))}
-        {unit}
-      </Text>
+      {unit.includes('$') ? (
+        <View style={styles.row}>
+          <Text>{formatUnit(unit)}</Text>
+          <Text>
+            {Math.round(
+              Number(amount) * moment().diff(moment(date), time, true) * 10
+            ) / 10}
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.row}>
+          <Text>
+            {Math.round(
+              Number(amount) * moment().diff(moment(date), time, true) * 10
+            ) / 10}
+          </Text>
+          <Text>{formatUnit(unit)}</Text>
+        </View>
+      )}
+
       <Text style={styles.text}>{name}</Text>
     </View>
   );
@@ -29,6 +46,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
   },
+  row: {
+    flexDirection: 'row',
+  },
 });
 
 export default EffectSummary;
+
+// <Text style={styles.text}>
+//         {Math.round(Number(amount) * moment().diff(moment(date), time, true))}
+//         {unit}
+//       </Text>

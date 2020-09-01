@@ -4,6 +4,33 @@ import PropTypes from 'prop-types';
 import Select from './Select';
 import TextInput from './TextInput';
 import isEmpty from '../helpers/is-empty';
+import {
+  NA,
+  SAVE,
+  AVOID,
+  DO,
+  HEALTH,
+  FINANCE,
+  ENVIRONMENT,
+  MILLIGRAMS,
+  GRAMS,
+  KILOGRAMS,
+  METRIC_TONNE,
+  DOLLARS,
+  SECOND,
+  MINUTE,
+  HOUR,
+  DAY,
+  MONTH,
+  YEAR,
+  CALORIES,
+  KILOJOULES,
+  METER,
+  KILOMETER,
+  LITRE,
+  WATT,
+  KILOWATT,
+} from '../helpers/constants';
 
 const CHANGE_EFFECT = 'CHANGE_EFFECT';
 const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
@@ -57,12 +84,12 @@ const reducer = (state, action) => {
 
 function AddEffect(props) {
   const [state, dispatch] = useReducer(reducer, {
-    effect: 'N/A',
-    category: 'N/A',
+    effect: NA,
+    category: NA,
     amount: '',
     name: '',
-    unit: 'N/A',
-    time: 'N/A',
+    unit: NA,
+    time: NA,
   });
 
   const { effect, category, amount, name, unit, time } = state;
@@ -79,10 +106,10 @@ function AddEffect(props) {
             dispatch({ type: CHANGE_EFFECT, payload: value })
           }
           items={[
-            { label: 'Not Applicable', value: 'N/A' },
-            { label: 'Save', value: 'Save' },
-            { label: 'Avoid', value: 'Avoid' },
-            { label: 'Do', value: 'Do' },
+            { label: 'Not Applicable', value: NA },
+            { label: 'Save', value: SAVE },
+            { label: 'Avoid', value: AVOID },
+            { label: 'Do', value: DO },
           ]}
         />
 
@@ -93,12 +120,12 @@ function AddEffect(props) {
             dispatch({ type: CHANGE_CATEGORY, payload: value })
           }
           items={[
-            { label: 'Not Applicable', value: 'N/A' },
-            { label: 'Other', value: 'Other' },
-            { label: 'Health', value: 'Health' },
-            { label: 'Finance', value: 'Finance' },
-            { label: 'Time', value: 'Time' },
-            { label: 'Environment', value: 'Environment' },
+            { label: 'Not Applicable', value: NA },
+            { label: 'Other', value: OTHER },
+            { label: 'Health', value: HEALTH },
+            { label: 'Finance', value: FINANCE },
+            { label: 'Time', value: TIME },
+            { label: 'Environment', value: ENVIRONMENT },
           ]}
         />
 
@@ -117,25 +144,25 @@ function AddEffect(props) {
             dispatch({ type: CHANGE_UNIT, payload: value })
           }
           items={[
-            { label: 'Not Applicable', value: 'N/A' },
-            { label: 'Milligrams', value: 'mg' },
-            { label: 'Grams', value: 'g' },
-            { label: 'Kilograms', value: 'kg' },
-            { label: 'Metric Tonne', value: 'T' },
-            { label: 'Dollars', value: '$' },
-            { label: 'Second', value: 's' },
-            { label: 'Minute', value: 'm' },
-            { label: 'Hour', value: 'h' },
-            { label: 'Day', value: 'd' },
-            { label: 'Month', value: 'M' },
-            { label: 'Year', value: 'y' },
-            { label: 'Calories', value: 'kCal' },
-            { label: 'Kilojoules', value: 'kJ' },
-            { label: 'Meter', value: 'm(meter)' },
-            { label: 'Kilometer', value: 'km' },
-            { label: 'Litre', value: 'l' },
-            { label: 'Watt', value: 'w' },
-            { label: 'Kilowatt', value: 'kw' },
+            { label: 'Not Applicable', value: NA },
+            { label: 'Milligrams', value: MILLIGRAMS },
+            { label: 'Grams', value: GRAMS },
+            { label: 'Kilograms', value: KILOGRAMS },
+            { label: 'Metric Tonne', value: METRIC_TONNE },
+            { label: 'Dollars', value: DOLLARS },
+            { label: 'Second', value: SECOND },
+            { label: 'Minute', value: MINUTE },
+            { label: 'Hour', value: HOUR },
+            { label: 'Day', value: DAY },
+            { label: 'Month', value: MONTH },
+            { label: 'Year', value: YEAR },
+            { label: 'Calories', value: CALORIES },
+            { label: 'Kilojoules', value: KILOJOULES },
+            { label: 'Meter', value: METER },
+            { label: 'Kilometer', value: KILOMETER },
+            { label: 'Litre', value: LITRE },
+            { label: 'Watt', value: WATT },
+            { label: 'Kilowatt', value: KILOWATT },
           ]}
         />
         <TextInput
@@ -153,14 +180,14 @@ function AddEffect(props) {
             dispatch({ type: CHANGE_TIME, payload: value })
           }
           items={[
-            { label: 'Not Applicable', value: 'N/A' },
-            { label: 'Second', value: 's' },
-            { label: 'Minute', value: 'm' },
-            { label: 'Hour', value: 'h' },
-            { label: 'Day', value: 'd' },
-            { label: 'Week', value: 'w' },
-            { label: 'Month', value: 'M' },
-            { label: 'Year', value: 'y' },
+            { label: 'Not Applicable', value: NA },
+            { label: 'Second', value: SECOND },
+            { label: 'Minute', value: MINUTE },
+            { label: 'Hour', value: HOUR },
+            { label: 'Day', value: DAY },
+            { label: 'Week', value: WEEK },
+            { label: 'Month', value: MONTH },
+            { label: 'Year', value: YEAR },
           ]}
         />
         <TouchableOpacity

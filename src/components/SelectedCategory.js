@@ -2,13 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import { NA } from '../helpers/constants';
 
 function SelectedCategory(props) {
   const { val, handleChange } = props;
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{val}</Text>
-      {val !== 'N/A' && (
+      {val !== NA && (
         <TouchableOpacity onPress={() => handleChange()}>
           <FontAwesome name='times-circle' style={styles.icon} />
         </TouchableOpacity>
