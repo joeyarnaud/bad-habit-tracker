@@ -1,66 +1,82 @@
-import React from 'react';
-import { Text } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
 import IndexScreen from './src/screens/IndexScreen';
 import CreateScreen from './src/screens/CreateScreen';
 import CustomHabitScreen from './src/screens/CustomHabitScreen';
 import PremadeHabitScreen from './src/screens/PremadeHabitScreen';
 import HabitsScreen from './src/screens/HabitsScreen';
 import HabitScreen from './src/screens/HabitScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
-const navigator = createStackNavigator(
-  {
-    index: IndexScreen,
-    create: CreateScreen,
-    custom: CustomHabitScreen,
-    premade: PremadeHabitScreen,
-    habits: HabitsScreen,
-    habit: HabitScreen,
-  },
-  {
-    initialRouteName: 'index',
-    defaultNavigationOptions: {
-      title: (
-        <React.Fragment>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '900',
-              fontFamily: 'sans-serif',
-              marginHorizontal: 10,
-            }}
-          >
-            Habits
-          </Text>
-          <FontAwesome
-            name='line-chart'
-            style={{
-              fontSize: 20,
-            }}
-          />
-        </React.Fragment>
-      ),
-      headerStyle: {
-        backgroundColor: '#8AFA96',
-      },
-      headerTitleStyle: {
-        color: '#fff',
-        fontWeight: 'boldest',
-      },
-      headerBackTitleStyle: {
-        color: '#fff',
-      },
-      cardStyle: {
-        backgroundColor: '#d3d3d3',
-      },
-    },
-  }
-);
+const Tab = createBottomTabNavigator();
+const CreateStack = createStackNavigator();
+const HabitsStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 
-const App = createAppContainer(navigator);
+const SettingsStackScreen = () => {
+  return (
+    <SettingsStack.Navigator initialRouteName='Settings'>
+      <SettingsStack.Screen name='Settings' component={SettingsScreen} />
+    </SettingsStack.Navigator>
+  );
+};
+
+const CreateStackScreen = () => {
+  return (
+    <CreateStack.Navigator initialRouteName='Create Habit'>
+      <CreateStack.Screen name='Create Habit' component={CreateScreen} />
+      <CreateStack.Screen name='Custom Habit' component={CustomHabitScreen} />
+      <CreateStack.Screen name='Common Habit' component={PremadeHabitScreen} />
+    </CreateStack.Navigator>
+  );
+};
+
+const HabitsStackScreen = () => {
+  return (
+    <HabitsStack.Navigator initialRouteName='Habits'>
+      <HabitsStack.Screen name='Habits' component={HabitsScreen} />
+      <HabitsStack.Screen name='Habit' component={HabitScreen} />
+    </HabitsStack.Navigator>
+  );
+};
 
 export default () => {
-  return <App />;
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName='Dashboard'
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Dashboard') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            } else if (route.name === 'Create Habit') {
+              iconName = focused ? 'ios-add-circle' : 'ios-add-circle-outline';
+            } else if (route.name === 'Habits') {
+              iconName = focused ? 'ios-alarm' : 'md-alarm';
+            } else if (route.name === 'Settings') {
+              iconName = 'ios-settings';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name='Dashboard' component={IndexScreen} />
+        <Tab.Screen name='Create Habit' component={CreateStackScreen} />
+        <Tab.Screen name='Habits' component={HabitsStackScreen} />
+        <Tab.Screen name='Settings' component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };

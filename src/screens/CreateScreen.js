@@ -2,16 +2,17 @@ import React, { useReducer } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import SuggestedHabits from '../components/SuggestedHabits';
 
-function CreateScreen({ navigation }) {
+function CreateScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.screenContainer}>
       <Text style={styles.title}>Track Habit Reduction</Text>
 
-      <SuggestedHabits />
+      <SuggestedHabits navigation={navigation} />
       <Text style={styles.separator}>Or</Text>
       <TouchableOpacity
         style={styles.buttonContainerStyles}
-        onPress={() => navigation.navigate('custom')}
+        onPress={() => navigation.navigate('Custom Habit')}
       >
         <Text style={styles.buttonTextStyles}>Create Custom Habit</Text>
       </TouchableOpacity>

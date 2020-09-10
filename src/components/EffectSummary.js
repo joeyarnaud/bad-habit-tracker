@@ -8,22 +8,22 @@ function EffectSummary(props) {
   return (
     <View style={styles.container}>
       <Text style={{ ...styles.text }}>{effect}</Text>
-      <Text style={{ ...styles.text, width: 85 }}>{category}</Text>
+      <Text style={{ ...styles.text }}>{category}</Text>
       <View style={styles.row}>
         {unit.includes('$') ? (
           <React.Fragment>
-            <Text>{formatUnit(unit)}</Text>
+            {formatUnit(unit)}
             <Text>{Math.round(amount * 100) / 100}</Text>
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Text>{Math.round(amount * 100) / 100}</Text>
-            <Text>{formatUnit(unit)}</Text>
+            {formatUnit(unit)}
           </React.Fragment>
         )}
       </View>
 
-      <Text style={{ ...styles.text, width: 70 }}>{name}</Text>
+      <Text style={{ ...styles.text }}>{name}</Text>
       <Text style={styles.text}>{convertTimeUnitToWord(time)}</Text>
     </View>
   );

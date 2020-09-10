@@ -25,3 +25,38 @@ Health -
 
 Finance - 
 1.5       aud       $
+
+// const navigator = createStackNavigator(
+//   {
+//     index: IndexScreen,
+//     create: CreateScreen,
+//     custom: CustomHabitScreen,
+//     premade: PremadeHabitScreen,
+//     habits: HabitsScreen,
+//     habit: HabitScreen,
+//   },
+//   {
+//     initialRouteName: 'index',
+//     defaultNavigationOptions: {
+//       title: (
+//         <React.Fragment>
+//           <Text>Habits</Text>
+//           <FontAwesome name='line-chart' />
+//         </React.Fragment>
+//       ),
+//       headerStyle: {
+//         backgroundColor: '#8AFA96',
+//       },
+//       headerTitleStyle: {
+//         color: '#fff',
+//         fontWeight: '900',
+//       },
+//       headerBackTitleStyle: {
+//         color: '#fff',
+//       },
+//       cardStyle: {
+//         backgroundColor: '#d3d3d3',
+//       },
+//     },
+//   }
+// );

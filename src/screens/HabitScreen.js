@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, AsyncStorage } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  AsyncStorage,
+  TouchableOpacity,
+} from 'react-native';
 import moment from 'moment';
+import ConfirmationModal from '../components/ConfirmationModal';
+import CalendarResetModal from '../components/CalendarResetModal';
 import EffectSummary from '../components/EffectSummary';
 import RunningTotalEffectSummary from '../components/RunningTotalEffectSummary';
 
 function HabitsScreen(props) {
-  const { navigation } = props;
-  const id = navigation.getParam('id');
+  const { navigation, route } = props;
+  const id = route.params.id;
   const [habit, setHabit] = useState({});
   const { date, effects, name, positiveOrNegative } = habit;
 
@@ -68,6 +77,30 @@ function HabitsScreen(props) {
             })}
           </React.Fragment>
         )}
+        <View style={styles.modifications}>
+          <ConfirmationModal
+            actionText='Delete'
+            confirmatonText='Are you sure you want to delete this habit?'
+            actionColor='#DB6153'
+            action={() => {
+              AsyncStorage.removeItem(`habit-${id}`);
+              navigation.reset({ index: 0, routes: [{ name: 'Habits' }] });
+            }}
+            buttonTitle='Delete Habit'
+            buttonStyles={styles.modificationButton}
+            iconName='trash'
+          />
+          <CalendarResetModal
+            action={async (newDate) => {
+              const habs = await JSON.parse(
+                await AsyncStorage.getItem(`habit-${id}`)
+              );
+              habs.date = newDate;
+              AsyncStorage.setItem(`habit-${id}`, JSON.stringify(habs));
+              navigation.reset({ index: 2, routes: [{ name: 'Habits' }] });
+            }}
+          />
+        </View>
       </View>
     </ScrollView>
   );
@@ -98,6 +131,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingHorizontal: 20,
     marginVertical: 20,
+  },
+  modifications: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  modificationButton: {
+    backgroundColor: '#DB6153',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderRadius: 5,
+    flexDirection: 'row',
+    marginBottom: 10,
   },
 });
 

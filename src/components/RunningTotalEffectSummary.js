@@ -11,7 +11,7 @@ function EffectSummary(props) {
     <View style={styles.container}>
       {unit.includes('$') ? (
         <View style={styles.row}>
-          <Text>{formatUnit(unit)}</Text>
+          {formatUnit(unit)}
           <Text>
             {Math.round(
               Number(amount) * moment().diff(moment(date), time, true) * 10
@@ -25,7 +25,7 @@ function EffectSummary(props) {
               Number(amount) * moment().diff(moment(date), time, true) * 10
             ) / 10}
           </Text>
-          <Text>{formatUnit(unit)}</Text>
+          {formatUnit(unit)}
         </View>
       )}
 

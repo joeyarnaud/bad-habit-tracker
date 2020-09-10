@@ -6,11 +6,6 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import PropTypes from 'prop-types';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
 import HabitSummary from './HabitSummary';
 import {
   ENVIRONMENT,
@@ -86,7 +81,7 @@ const smoking = {
       category: FINANCE,
       amount: 30,
       unit: DOLLARS,
-      name: 'Dollars',
+      name: 'Money',
       time: DAY,
     },
   ],
@@ -94,7 +89,7 @@ const smoking = {
   totalAmount: 20,
   timeSpan: DAY,
   prompt: 'How many cigarettes do you smoke per day?',
-  icon: <FontAwesome5 name='smoking' size={24} color='black' />,
+  icon: 'smoking',
   positiveOrNegative: NEGATIVE,
   id: 1,
   type: 'premade',
@@ -102,7 +97,7 @@ const smoking = {
 
 const drinking = {
   name: 'Alcohol',
-  icon: <Entypo name='drink' size={24} color='black' />,
+  icon: 'glass-martini-alt',
   effects: [
     {
       effect: AVOID,
@@ -131,7 +126,7 @@ const drinking = {
 
 const social = {
   name: 'Social Media',
-  icon: <Foundation name='social-myspace' size={24} color='black' />,
+  icon: 'users',
   effects: [
     {
       effect: SAVE,
@@ -144,6 +139,7 @@ const social = {
   ],
   id: 3,
   totalAmount: 144,
+  positiveOrNegative: NEGATIVE,
   timeSpan: DAY,
   prompt: 'How many minutes do you spend on social media per day?',
   type: 'premade',
@@ -151,7 +147,7 @@ const social = {
 
 const gambling = {
   name: 'Gambling',
-  icon: <FontAwesome5 name='dice' size={24} color='black' />,
+  icon: 'dice',
   effects: [
     {
       effect: SAVE,
@@ -164,6 +160,7 @@ const gambling = {
   ],
   id: 4,
   totalAmount: 110,
+  positiveOrNegative: NEGATIVE,
   timeSpan: MONTH,
   prompt: 'How much do you spend gambling each month?',
   type: 'premade',
@@ -182,7 +179,7 @@ function SuggestedHabits(props) {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('premade', item)}
+              onPress={() => navigation.navigate('Common Habit', item)}
             >
               <HabitSummary key={item.name} name={item.name} icon={item.icon} />
             </TouchableOpacity>
@@ -204,4 +201,4 @@ const styles = StyleSheet.create({
 
 SuggestedHabits.propTypes = {};
 
-export default withNavigation(SuggestedHabits);
+export default SuggestedHabits;

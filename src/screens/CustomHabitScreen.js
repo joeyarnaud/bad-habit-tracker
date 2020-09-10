@@ -27,7 +27,6 @@ const FINISH_HABIT = 'FINISH_HABIT';
 const CLEAR_HABIT = 'CLEAR_HABIT';
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case NAME_CHANGE:
       return {
@@ -100,7 +99,6 @@ function CustomHabitScreen({ navigation }) {
     finished,
     id,
   } = state;
-  console.log(state);
 
   return (
     <ScrollView style={styles.container}>
@@ -216,7 +214,9 @@ function CustomHabitScreen({ navigation }) {
             <Text style={styles.or}>Or</Text>
             <TouchableOpacity
               style={styles.navigate}
-              onPress={() => navigation.navigate('habit', id)}
+              onPress={() =>
+                navigation.reset({ index: 2, routes: [{ name: 'Habits' }] })
+              }
             >
               <Text style={styles.createAnotherText}>View Habit</Text>
             </TouchableOpacity>

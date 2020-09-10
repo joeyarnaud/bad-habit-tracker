@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 function HabitSummary(props) {
@@ -7,7 +8,9 @@ function HabitSummary(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{name}</Text>
-      <Text>{icon}</Text>
+      <Text>
+        <FontAwesome5 name={icon} size={24} color='black' />
+      </Text>
     </View>
   );
 }
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
 
 HabitSummary.propTypes = {
   name: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default HabitSummary;

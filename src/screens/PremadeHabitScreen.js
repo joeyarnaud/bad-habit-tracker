@@ -8,12 +8,13 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
+import { FontAwesome5 } from '@expo/vector-icons';
 import TextInput from '../components/TextInput';
 import HabitCalendar from '../components/HabitCalendar';
 import isEmpty from '../helpers/is-empty';
 
-function PremadeHabitScreen({ navigation }) {
-  console.log(navigation.state.params);
+function PremadeHabitScreen(props) {
+  const { navigation, route } = props;
   const {
     name,
     icon,
@@ -21,25 +22,16 @@ function PremadeHabitScreen({ navigation }) {
     totalAmount,
     effects,
     positiveOrNegative,
-  } = navigation.state.params;
+  } = route.params;
   const [total, setTotal] = useState(totalAmount.toString());
   const [date, setDate] = useState(new Date());
-  console.log(total, date);
-  console.log({
-    name,
-    positiveOrNegative,
-    effects: effects.map((effect) => {
-      return { ...effect, amount: ((effect.amount / 20) * total).toFixed(2) };
-    }),
-    date,
-  });
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.screenContainer}>
         <Text style={styles.title}>
           {name}
-          {'   '} {icon}
+          {'   '} {<FontAwesome5 name={icon} size={24} color='black' />}
         </Text>
         <TextInput
           placeholder={prompt}
@@ -66,11 +58,15 @@ function PremadeHabitScreen({ navigation }) {
                 name,
                 positiveOrNegative,
                 effects: effects.map((effect) => {
-                  return { ...effect, amount: (effect.amount / 20) * total };
+                  return {
+                    ...effect,
+                    amount: (effect.amount / totalAmount) * total,
+                  };
                 }),
                 date,
               })
             );
+            navigation.reset({ index: 0, routes: [{ name: 'Habits' }] });
           }}
         >
           <Text style={styles.createText}>Create Habit</Text>

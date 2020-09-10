@@ -21,6 +21,7 @@ import {
   MINUTE,
   HOUR,
   DAY,
+  WEEK,
   MONTH,
   YEAR,
   CALORIES,
@@ -30,6 +31,8 @@ import {
   LITRE,
   WATT,
   KILOWATT,
+  OTHER,
+  TIME,
 } from '../helpers/constants';
 
 const CHANGE_EFFECT = 'CHANGE_EFFECT';
@@ -40,7 +43,6 @@ const CHANGE_UNIT = 'CHANGE_UNIT';
 const CHANGE_TIME = 'CHANGE_TIME';
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case CHANGE_EFFECT:
       return {

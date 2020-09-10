@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, AsyncStorage, ScrollView } from 'react-native';
 import YourHabitSummary from '../components/YourHabitSummary';
+import isEmpty from '../helpers/is-empty';
 
-function HabitScreen({ navigation }) {
+function HabitScreen(props) {
+  const { navigation } = props;
   const [habits, setHabits] = useState([]);
 
   const getHabits = async () => {
@@ -18,8 +20,6 @@ function HabitScreen({ navigation }) {
     getHabits();
   }, []);
 
-  console.log(habits);
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.screenContainer}>
@@ -28,23 +28,37 @@ function HabitScreen({ navigation }) {
           <Text style={styles.text}>Habit Name</Text>
           <Text style={styles.text}>Streak</Text>
         </View>
-        {habits.map((habit) => {
-          console.log(habit);
-          return (
-            <YourHabitSummary
-              id={habit.id}
-              name={habit.name}
-              date={habit.date}
-              effects={habit.effects}
-              key={habit.id}
-              handlePress={() =>
-                navigation.navigate('habit', {
-                  id: ['Smoking'].includes(habit.name) ? habit.name : habit.id,
-                })
-              }
-            />
-          );
-        })}
+        {!isEmpty(habits) ? (
+          habits.map((habit) => {
+            return (
+              <YourHabitSummary
+                id={habit.id}
+                name={habit.name}
+                date={habit.date}
+                effects={habit.effects}
+                key={habit.id}
+                handlePress={() =>
+                  navigation.navigate('Habit', {
+                    id: [
+                      'Smoking',
+                      'Alcohol',
+                      'Social Media',
+                      'Gambling',
+                    ].includes(habit.name)
+                      ? habit.name
+                      : habit.id,
+                  })
+                }
+              />
+            );
+          })
+        ) : (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyContainerText}>
+              You haven't created any habits yet
+            </Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
@@ -73,6 +87,17 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '700',
     fontSize: 20,
+  },
+  emptyContainer: {
+    backgroundColor: '#fff',
+    // paddingVertical: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  emptyContainerText: {
+    fontWeight: '700',
+    fontSize: 16,
+    padding: 10,
   },
 });
 
