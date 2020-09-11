@@ -75,7 +75,6 @@ export default () => {
         <Tab.Screen name='Dashboard' component={IndexScreen} />
         <Tab.Screen name='Create Habit' component={CreateStackScreen} />
         <Tab.Screen name='Habits' component={HabitsStackScreen} />
-        <Tab.Screen name='Settings' component={SettingsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
